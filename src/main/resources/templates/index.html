@@ -1,57 +1,50 @@
-
-
 <!DOCTYPE html>
 <html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Painel | Espaço Comunitário</title>
-
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
-
 <body>
 
-    <header>
-        <h1>Espaço Comunitário</h1>
-        <p>Associação de Moradores de Paraíso de Murinin</p>
-    </header>
+<header>
+    <h1>Espaço Comunitário</h1>
+    <p>Associação de Moradores de Paraíso de Murinin</p>
+</header>
 
-    <main>
+<main>
+    <h2>Painel de Gerenciamento</h2>
 
-        <h2>Painel de Gerenciamento</h2>
+    <p>
+        Bem-vindo ao sistema de gerenciamento
+        de agendamentos do espaço comunitário.
+    </p>
 
-        <p>
-            Bem-vindo ao sistema de gerenciamento
-            de agendamentos do espaço comunitário.
-        </p>
+    <section class="menu">
 
-        <section class="menu">
+        <a class="card" th:href="@{/agendamentos/novo}">
+            <h3>Cadastrar Agendamento</h3>
+            <p>Registre novos eventos no espaço comunitário.</p>
+        </a>
 
-            <article class="card">
-                <h3>Cadastrar Agendamento</h3>
-                <p>Registre novos eventos no espaço comunitário.</p>
-            </article>
+        <a class="card" th:href="@{/agendamentos}">
+            <h3>Consultar Agendamentos</h3>
+            <p>Consulte os eventos já registrados.</p>
+        </a>
 
-            <article class="card">
-                <h3>Consultar Agendamentos</h3>
-                <p>Consulte os eventos já registrados.</p>
-            </article>
+        <a class="card" th:href="@{/agendamentos}">
+            <h3>Calendário</h3>
+            <p>Consulte a programação dos eventos.</p>
+        </a>
 
-            <article class="card">
-                <h3>Calendário</h3>
-                <p>Visualize a programação do espaço.</p>
-            </article>
+        <a class="card" th:href="@{/agendamentos}">
+            <h3>Gerenciar Eventos</h3>
+            <p>Edite ou exclua agendamentos.</p>
+        </a>
 
-            <article class="card">
-                <h3>Gerenciar Eventos</h3>
-                <p>Edite ou exclua agendamentos.</p>
-            </article>
-
-        </section>
-
-    </main>
+    </section>
+</main>
 
 </body>
 </html>
