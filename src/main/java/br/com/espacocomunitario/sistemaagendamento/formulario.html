@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Agendamento</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<header>
+    <h1>Espaço Comunitário</h1>
+    <p>Associação de Moradores de Paraíso de Murinin</p>
+</header>
+
+<main>
+    <h2 th:text="${agendamento.id == null ? 'Novo agendamento' : 'Editar agendamento'}">
+        Novo agendamento
+    </h2>
+
+    <p th:if="${erro}" th:text="${erro}"></p>
+
+    <form th:action="@{/agendamentos/salvar}"
+          th:object="${agendamento}"
+          method="post">
+
+        <input type="hidden" th:field="*{id}">
+
+        <label>Nome do evento:</label>
+        <input type="text" th:field="*{nomeEvento}" required>
+
+        <label>Responsável:</label>
+        <input type="text" th:field="*{responsavel}" required>
+
+        <label>Telefone:</label>
+        <input type="tel" th:field="*{telefone}" required>
+
+        <label>Data:</label>
+        <input type="date" th:field="*{data}" required>
+
+        <label>
+            <input type="checkbox" th:field="*{diaInteiro}" id="diaInteiro">
+            Evento durante o dia inteiro
+        </label>
+
+        <div id="horarios">
+            <label>Horário de início:</label>
+            <input type="time" th:field="*{horaInicio}" id="horaInicio">
+
+            <label>Horário de término:</label>
+            <input type="time" th:field="*{horaFim}" id="horaFim">
+        </div>
+
+        <label>Descrição:</label>
+        <textarea th:field="*{descricao}"></textarea>
+
+        <label>Observações:</label>
+        <textarea th:field="*{observacoes}"></textarea>
+
+        <button type="submit">Salvar agendamento</button>
+        <a th:href="@{/agendamentos}">Cancelar</a>
+    </form>
+</main>
+
+<script>
+    const diaInteiro = document.getElementById('diaInteiro');
+    const horarios = document.getElementById('horarios');
+    const horaInicio = document.getElementById('horaInicio');
+    const horaFim = document.getElementById('horaFim');
+
+    function atualizarHorarios() {
+        horarios.style.display = diaInteiro.checked ? 'none' : 'block';
+        horaInicio.required = !diaInteiro.checked;
+        horaFim.required = !diaInteiro.checked;
+    }
+
+    diaInteiro.addEventListener('change', atualizarHorarios);
+    atualizarHorarios();
+</script>
+
+</body>
+</html>
