@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendamentos | Espaço Comunitário</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<header>
+    <h1>Espaço Comunitário</h1>
+    <p>Associação de Moradores de Paraíso de Murinin</p>
+</header>
+
+<main>
+    <h2>Agendamentos cadastrados</h2>
+
+    <p th:if="${sucesso}" th:text="${sucesso}"></p>
+
+    <a th:href="@{/}">Voltar ao painel</a>
+    |
+    <a th:href="@{/agendamentos/novo}">Novo agendamento</a>
+
+    <p th:if="${#lists.isEmpty(agendamentos)}">
+        Nenhum agendamento cadastrado.
+    </p>
+
+    <table th:unless="${#lists.isEmpty(agendamentos)}">
+        <thead>
+            <tr>
+                <th>Evento</th>
+                <th>Responsável</th>
+                <th>Telefone</th>
+                <th>Data</th>
+                <th>Horário</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="a : ${agendamentos}">
+                <td th:text="${a.nomeEvento}"></td>
+                <td th:text="${a.responsavel}"></td>
+                <td th:text="${a.telefone}"></td>
+                <td th:text="${#temporals.format(a.data, 'dd/MM/yyyy')}"></td>
+                <td th:text="${a.diaInteiro ? 'Dia inteiro' : a.horaInicio + ' às ' + a.horaFim}"></td>
+                <td>
+                    <a th:href="@{/agendamentos/editar/{id}(id=${a.id})}">Editar</a>
+
+                    <form th:action="@{/agendamentos/excluir/{id}(id=${a.id})}"
+                          method="post"
+                          style="display:inline">
+                        <button type="submit"
+                                onclick="return confirm('Deseja excluir este agendamento?')">
+                            Excluir
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</main>
+
+</body>
+</html>
